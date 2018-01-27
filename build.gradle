@@ -1,0 +1,26 @@
+buildscript {
+	dependencies {
+		classpath "org.dreamscale:gradle-core:1.3.2"
+	}
+}
+
+apply plugin: "org.dreamscale.core-oss"
+
+dependencies {
+	compileOnly 'org.projectlombok:lombok:1.16.18'
+}
+
+publishing_ext {
+	publishJavadoc true
+}
+
+bintray {
+	publications = ['commonSpringBoot']
+	pkg {
+		licenses = ['Apache-2.0']
+	}
+}
+
+license {
+	excludes(["**/*.properties", "**/*.xml", "**/*.yml", "db/**", "licenses/**"])
+}
