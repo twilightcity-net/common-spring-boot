@@ -1,0 +1,17 @@
+ext {
+    artifactId = "${artifactId}-rest-feign"
+    feignVersion = "9.5.1"
+}
+
+dependencies {
+    compile "io.github.openfeign:feign-core:${feignVersion}"
+    compile "io.github.openfeign:feign-jackson:${feignVersion}"
+    compile "io.github.openfeign.form:feign-form:3.0.3"
+}
+
+bintray {
+    publications = ['commonSpringBootRestFeign']
+    pkg {
+        licenses = ['Apache-2.0']
+    }
+}
