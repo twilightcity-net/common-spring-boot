@@ -1,0 +1,13 @@
+ext {
+    artifactId = "${artifactId}-rest-api"
+}
+
+dependencies {
+    compile "com.google.guava:guava:23.6-jre"
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile "javax.annotation:javax.annotation-api:1.2"
+    compile "javax.validation:validation-api:1.1.0.Final"
+    compile "org.hibernate:hibernate-validator:5.3.6.Final"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.8.10"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4"
+}

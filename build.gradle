@@ -5,7 +5,7 @@ buildscript {
 }
 
 allprojects {
-    apply plugin: "org.dreamscale.core-oss"
+    apply plugin: "org.dreamscale.core"
 
     version = "${springBootVersion}-${version}"
 
@@ -41,8 +41,4 @@ bintray {
     pkg {
         licenses = ['Apache-2.0']
     }
-}
-
-license {
-    excludes(["**/*.properties", "**/*.xml", "**/*.yml", "db/**", "licenses/**"])
 }

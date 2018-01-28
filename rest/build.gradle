@@ -4,9 +4,9 @@ ext {
 
 dependencies {
     compile rootProject
+    compile project(":rest-api")
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile 'org.springframework.hateoas:spring-hateoas:0.24.0.RELEASE'
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4"
     compile "io.springfox:springfox-swagger2:2.7.0"
     compile "io.springfox:springfox-swagger-ui:2.7.0"
     compile("net.sf.dozer:dozer:5.5.1") {
@@ -29,8 +29,4 @@ bintray {
     pkg {
         licenses = ['Apache-2.0']
     }
-}
-
-license {
-    excludes(["**/*.properties", "**/*.xml", "**/*.yml", "db/**", "licenses/**"])
 }
