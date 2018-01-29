@@ -56,11 +56,15 @@ public class RequestLogger {
     }
 
     private boolean shouldAppendRequestPayload() {
-        if (loggerSupport.shouldLogPayload()) {
+        if (shouldLogRequestPayload()) {
             LoggingLevel logLevel = loggerSupport.getPayloadLogLevelBasedOnReqMethod(request.getMethod());
             return loggerSupport.isLogLevelEnabled(log, logLevel);
         }
         return false;
+    }
+
+    private boolean shouldLogRequestPayload() {
+        return loggerSupport.shouldLogPayload() && "PUT".equals(request.getMethod()) || "POST".equals(request.getMethod());
     }
 
     private boolean isPayloadReadableContentType() {

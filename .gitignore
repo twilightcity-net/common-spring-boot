@@ -15,3 +15,5 @@ out
 .classpath
 .projectbuild
 bin
+
+logs

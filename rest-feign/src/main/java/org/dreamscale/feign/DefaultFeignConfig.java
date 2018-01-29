@@ -20,7 +20,6 @@ public class DefaultFeignConfig {
     public JacksonFeignBuilder jacksonFeignBuilder() {
         ObjectMapperBuilder encoderObjectMapperBuilder = new ObjectMapperBuilder()
                 .jsr310TimeModule()
-                .enable(SerializationFeature.INDENT_OUTPUT)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL);
         ObjectMapperBuilder decoderObjectMapperBuilder = new ObjectMapperBuilder()
                 .jsr310TimeModule()
