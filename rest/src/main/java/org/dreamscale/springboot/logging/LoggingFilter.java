@@ -35,12 +35,10 @@ public class LoggingFilter extends OncePerRequestFilter implements ResponseBodyA
 
     private static final ThreadLocal<Object> RESPONSE_BODY = new ThreadLocal<>();
 
-    @Value("${rest.logging.prefix}:rest.invocation")
+    @Value("${rest.logging.prefix:rest.invocation}")
     private String pathPrefix;
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private LoggerSupport loggerSupport;
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
     private RequestResponseLoggerFactory requestResponseLoggerFactory;
@@ -63,7 +61,7 @@ public class LoggingFilter extends OncePerRequestFilter implements ResponseBodyA
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        ServletRequestAdapter servletRequestAdapter = new ServletRequestAdapter(request, loggerSupport);
+        ServletRequestAdapter servletRequestAdapter = new ServletRequestAdapter(request);
         Logger logger = getLogger(servletRequestAdapter);
 
         try {

@@ -78,7 +78,7 @@ public class RequestLogger {
 
     private String getRequestPayload() {
         try {
-            String payload = request.getRequestPayload();
+            String payload = request.getRequestPayload(loggerSupport);
             return payload == null ? "" : payload.trim();
         } catch (IOException ex) {
             log.warn("Failed to convert request payload to string", ex);
@@ -106,10 +106,8 @@ public class RequestLogger {
     private boolean shouldLogHeader(String key) {
         if (excludedHeaderKeys.contains(key)) {
             return false;
-        } else if (includedHeaderKeys.isEmpty()) {
-            return true;
         } else {
-            return includedHeaderKeys.contains(key);
+            return includedHeaderKeys.isEmpty() || includedHeaderKeys.contains(key);
         }
     }
 

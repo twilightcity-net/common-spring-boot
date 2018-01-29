@@ -24,8 +24,8 @@ public class ServletRequestAdapter implements RequestAdapter {
     private static final String DEFAULT_ENCODING = "UTF-8";
     private PayloadRecordingRequestWrapper request;
 
-    public ServletRequestAdapter(HttpServletRequest request, LoggerSupport loggerSupport) {
-        this.request = new PayloadRecordingRequestWrapper(request, loggerSupport);
+    public ServletRequestAdapter(HttpServletRequest request) {
+        this.request = new PayloadRecordingRequestWrapper(request);
     }
 
     public HttpServletRequest getRequest() {
@@ -43,8 +43,8 @@ public class ServletRequestAdapter implements RequestAdapter {
     }
 
     @Override
-    public String getRequestPayload() throws IOException {
-        return request.getPayload();
+    public String getRequestPayload(LoggerSupport loggerSupport) throws IOException {
+        return request.getPayload(loggerSupport);
     }
 
     @Override
@@ -61,16 +61,14 @@ public class ServletRequestAdapter implements RequestAdapter {
     private static class PayloadRecordingRequestWrapper extends HttpServletRequestWrapper {
 
         private PayloadRecordingServletInputStream payloadRecordingInputStream;
-        private LoggerSupport loggerSupport;
 
-        PayloadRecordingRequestWrapper(HttpServletRequest request, LoggerSupport loggerSupport) {
+        PayloadRecordingRequestWrapper(HttpServletRequest request) {
             super(request);
-            this.loggerSupport = loggerSupport;
         }
 
-        String getPayload() throws IOException {
+        String getPayload(LoggerSupport loggerSupport) throws IOException {
             String encoding = getCharacterEncoding();
-            return ((PayloadRecordingServletInputStream) getInputStream()).getPayload(encoding);
+            return ((PayloadRecordingServletInputStream) getInputStream()).getPayload(loggerSupport, encoding);
         }
 
         @Override
@@ -82,7 +80,7 @@ public class ServletRequestAdapter implements RequestAdapter {
         @Override
         public ServletInputStream getInputStream() throws IOException {
             if (payloadRecordingInputStream == null) {
-                payloadRecordingInputStream = new PayloadRecordingServletInputStream(super.getInputStream(), loggerSupport);
+                payloadRecordingInputStream = new PayloadRecordingServletInputStream(super.getInputStream());
             }
             return payloadRecordingInputStream;
         }
@@ -99,19 +97,16 @@ public class ServletRequestAdapter implements RequestAdapter {
 
         private ServletInputStream delegate;
         private BufferedInputStream bufferedInputStream;
-        private LoggerSupport loggerSupport;
-        private int maxEntitySize;
         private boolean done = false;
 
-        PayloadRecordingServletInputStream(ServletInputStream delegate, LoggerSupport loggerSupport) {
+        PayloadRecordingServletInputStream(ServletInputStream delegate) {
             this.delegate = delegate;
-            this.loggerSupport = loggerSupport;
             this.bufferedInputStream = new BufferedInputStream(delegate);
-            this.maxEntitySize = loggerSupport.getMaxEntitySize();
         }
 
-        String getPayload(String charset) throws IOException {
+        String getPayload(LoggerSupport loggerSupport, String charset) throws IOException {
             try {
+                int maxEntitySize = loggerSupport.getMaxEntitySize();
                 bufferedInputStream.mark(maxEntitySize + 1);
                 // maxEntitySize + 1 so getPayloadString will correctly truncate
                 byte[] entity = new byte[maxEntitySize + 1];

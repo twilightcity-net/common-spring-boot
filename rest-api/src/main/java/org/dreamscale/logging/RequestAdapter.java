@@ -9,7 +9,7 @@ public interface RequestAdapter {
 
     String getRequestURI();
 
-    String getRequestPayload() throws IOException;
+    String getRequestPayload(LoggerSupport loggerSupport) throws IOException;
 
     Collection<String> getHeaderNames();
 

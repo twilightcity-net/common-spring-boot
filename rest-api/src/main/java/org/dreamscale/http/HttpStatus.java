@@ -2,6 +2,13 @@ package org.dreamscale.http;
 
 public interface HttpStatus {
 
+    // --- 2xx Success ---
+
+    /** {@code 204 No Content} (HTTP/1.0 - RFC 1945) */
+    int SC_NO_CONTENT = 204;
+    /** {@code 205 Reset Content} (HTTP/1.1 - RFC 2616) */
+    int SC_RESET_CONTENT = 205;
+
     // --- 3xx Redirection ---
 
     /** {@code 303 See Other} (HTTP/1.1 - RFC 2616) */

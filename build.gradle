@@ -29,6 +29,9 @@ allprojects {
         sharedTestCompile ("org.spockframework:spock-core:${spockVersion}") {
             exclude group: "org.codehaus.groovy"
         }
+        sharedTestCompile ("org.spockframework:spock-spring:${spockVersion}") {
+            exclude group: "org.codehaus.groovy"
+        }
     }
 }
 
