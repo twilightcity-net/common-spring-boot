@@ -47,7 +47,7 @@ public class ResponseLogger {
 
     private String getResponsePayload(ResponseAdapter response) {
         try {
-            String payload = response.getResponsePayload();
+            String payload = response.getResponsePayload(loggerSupport);
             return payload == null ? "" : payload.trim();
         } catch (IOException ex) {
             log.warn("Failed to convert request response payload to string", ex);

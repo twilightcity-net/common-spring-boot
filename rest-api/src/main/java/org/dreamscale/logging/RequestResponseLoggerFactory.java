@@ -62,11 +62,19 @@ public class RequestResponseLoggerFactory {
                 .build();
     }
 
+    private void assertIdNotNull() {
+        if (id == null) {
+            throw new RuntimeException("Application error - id not set");
+        }
+    }
+
     public RequestLogger createRequestLogger(RequestAdapter requestAdapter, Logger log) {
+        assertIdNotNull();
         return new RequestLogger(requestAdapter, loggerSupport, log, id, excludedHeaderKeys, includedHeaderKeys);
     }
 
     public ResponseLogger createResponseLogger(ResponseAdapter responseAdapter, Logger log) {
+        assertIdNotNull();
         return new ResponseLogger(responseAdapter, loggerSupport, log, id);
     }
 

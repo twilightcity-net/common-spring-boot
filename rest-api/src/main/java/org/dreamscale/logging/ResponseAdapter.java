@@ -19,6 +19,6 @@ public interface ResponseAdapter {
         return null;
     }
 
-    String getResponsePayload() throws IOException;
+    String getResponsePayload(LoggerSupport loggerSupport) throws IOException;
 
 }
