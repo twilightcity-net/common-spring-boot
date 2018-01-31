@@ -216,7 +216,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         private List<MediaType> mediaTypes;
 
         MediaTypeList(String[] mediaTypeArray) {
-            if(mediaTypeArray != null) {
+            if (mediaTypeArray != null) {
                 List<String> mediaTypeList = Arrays.asList(mediaTypeArray);
                 mediaTypes = MediaType.parseMediaTypes(mediaTypeList);
             } else {

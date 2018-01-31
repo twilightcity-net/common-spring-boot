@@ -1,7 +1,7 @@
 package org.dreamscale.springboot.validation;
 
 
-public enum  ValidationErrorCodeGroups {
+public enum ValidationErrorCodeGroups {
 
     VALIDATION("VAL");
 

@@ -5,6 +5,8 @@ import org.dreamscale.exception.NotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 
+import java.time.Duration
+
 @ComponentTest
 class RestRequestComponentSpec extends Specification {
 
@@ -100,6 +102,20 @@ class RestRequestComponentSpec extends Specification {
 
         expect:
         assert content == crudClient.uploadFile(fileToUpload)
+    }
+
+    def "should handle jsr310 serialization support"() {
+        given:
+        Widget widget = new Widget(id: 1)
+        widget.id = 1
+        widget.duration = Duration.parse("PT20M")
+        resource.widgetMap[widget.id] = widget
+
+        when:
+        Widget response = crudClient.find(1)
+
+        then:
+        assert response == widget
     }
 
 }

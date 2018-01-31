@@ -15,7 +15,7 @@ import java.util.Map;
 @NoArgsConstructor
 public class ErrorEntity {
     private String errorCode;
-    private Map<String,String> violations;
+    private Map<String, String> violations;
     private String message;
     private Object[] args;
     @JsonIgnore

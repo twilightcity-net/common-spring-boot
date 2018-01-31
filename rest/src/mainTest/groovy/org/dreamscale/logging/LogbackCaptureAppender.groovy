@@ -2,29 +2,31 @@ package org.dreamscale.logging
 
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.AppenderBase
+import org.slf4j.LoggerFactory
+
+import java.util.concurrent.atomic.AtomicBoolean
 
 class LogbackCaptureAppender extends AppenderBase<ILoggingEvent> {
 
-    private static LogbackCaptureAppender INSTANCE = new LogbackCaptureAppender();
+    private static LogbackCaptureAppender INSTANCE = new LogbackCaptureAppender()
 
     static LogbackCaptureAppender getInstance() {
-        return INSTANCE;
+        return INSTANCE
     }
 
-    private boolean enabled = false
-    private List<ILoggingEvent> eventList = []
+    private AtomicBoolean enabled = new AtomicBoolean(false)
+    private List<ILoggingEvent> eventList = Collections.synchronizedList([])
 
     @Override
     protected void append(ILoggingEvent event) {
-        LogbackCaptureAppender appender = LogbackCaptureAppender.getInstance();
-        if (appender.enabled) {
-            appender.eventList << event
+        if (INSTANCE.enabled.get()) {
+            INSTANCE.eventList.add(event)
         }
     }
 
     @Override
     String toString() {
-        return eventList;
+        return eventList.toString()
     }
 
     List<ILoggingEvent> getEvents() {
@@ -53,12 +55,11 @@ class LogbackCaptureAppender extends AppenderBase<ILoggingEvent> {
 
     void enable() {
         eventList.clear()
-        enabled = true
+        enabled.set(true)
     }
 
     void disable() {
-        enabled = false
-        eventList.clear()
+        enabled.set(false)
     }
 
 }

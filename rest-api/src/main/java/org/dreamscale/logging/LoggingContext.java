@@ -12,10 +12,10 @@ public class LoggingContext implements AutoCloseable {
 
     private List<MDC.MDCCloseable> closeables = new ArrayList<>();
 
-    private LoggingContext(Map<String,String> context) {
+    private LoggingContext(Map<String, String> context) {
         closeables.addAll(context.entrySet().stream()
-                .map(entry -> MDC.putCloseable(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList()));
+                                  .map(entry -> MDC.putCloseable(entry.getKey(), entry.getValue()))
+                                  .collect(Collectors.toList()));
     }
 
     @Override

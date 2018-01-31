@@ -1,15 +1,20 @@
 package org.dreamscale.springboot.rest;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Duration;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Widget {
 
-    private Long id = 5L;
+    private Long id;
+    private Duration duration;
+
+    public Widget(Long id) {
+        this.id = id;
+    }
 
     public String toString() {
         return "Widget[${" + id + "}]";

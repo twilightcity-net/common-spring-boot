@@ -5,7 +5,7 @@ import org.dreamscale.exception.ErrorCodes;
 
 import static org.dreamscale.springboot.validation.ValidationErrorCodeGroups.VALIDATION;
 
-public enum  ValidationErrorCodes implements ErrorCodes {
+public enum ValidationErrorCodes implements ErrorCodes {
     ERROR_ENTITY_VALIDATION(1, VALIDATION),
     ERROR_ENTITY_DATA_FORMAT(2, VALIDATION);
 

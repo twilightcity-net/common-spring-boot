@@ -34,7 +34,7 @@ class LoggingFilterComponentSpec extends Specification {
         logger.setLevel(originalLevel)
     }
 
-    def "should only log GET payload when TRACE is enabled" () {
+    def "should only log GET payload when TRACE is enabled"() {
         given:
         crudResource.widgetMap[5L] = new Widget(5)
 
@@ -61,18 +61,18 @@ class LoggingFilterComponentSpec extends Specification {
 
         then:
         logbackCaptureAppender.assertEventWithContent('Server Request: [POST /widgets], Payload: [{"id":5}]')
-        logbackCaptureAppender.assertEventWithContent( 'Server Response: [POST /widgets < 201], Payload: [{"id":5}]')
+        logbackCaptureAppender.assertEventWithContent('Server Response: [POST /widgets < 201], Payload: [{"id":5}]')
     }
 
     def "should log ErrorEntity when exception is thrown"() {
         when:
         crudClient.find(1)
-        
+
         then:
         thrown(NotFoundException)
 
         and:
-        logbackCaptureAppender.assertEventWithContent('Server Response: [GET /widgets/1 < 404], Payload: [{"errorCode":null,"violations":null,"message":"No widget with id=1","args":[1]}]')
+        logbackCaptureAppender.assertEventWithContent('Server Response: [GET /widgets/1 < 404], Payload: [{"message":"No widget with id=1","args":[1]}]')
     }
 
 }
