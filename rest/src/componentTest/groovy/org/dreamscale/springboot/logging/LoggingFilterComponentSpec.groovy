@@ -5,9 +5,9 @@ import ch.qos.logback.classic.Logger
 import org.dreamscale.ComponentTest
 import org.dreamscale.exception.NotFoundException
 import org.dreamscale.logging.LogbackCaptureAppender
-import org.dreamscale.springboot.crud.CrudClient
-import org.dreamscale.springboot.crud.CrudResource
-import org.dreamscale.springboot.crud.Widget
+import org.dreamscale.springboot.rest.CrudClient
+import org.dreamscale.springboot.rest.CrudResource
+import org.dreamscale.springboot.rest.Widget
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification

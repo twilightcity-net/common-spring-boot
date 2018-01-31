@@ -1,4 +1,4 @@
-package org.dreamscale.springboot.crud
+package org.dreamscale.springboot.rest
 
 import org.dreamscale.exception.NotFoundException
 import org.springframework.http.HttpStatus
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping(path = "/widgets", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,6 +52,16 @@ class CrudResource {
     ResponseEntity delete(@PathVariable Long id) {
         widgetMap.remove(id)
         ResponseEntity.ok().build()
+    }
+
+    @PostMapping(path = "/text", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+    String getText(@RequestBody String text) {
+        text
+    }
+
+    @PostMapping(path = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+    String uploadFile(@RequestParam("file") MultipartFile multipartFile) {
+        multipartFile.inputStream.text
     }
 
 }

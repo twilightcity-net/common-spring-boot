@@ -1,4 +1,4 @@
-package org.dreamscale.springboot.crud;
+package org.dreamscale.springboot.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,7 @@ package org.dreamscale.springboot.exception;
 
 import feign.Headers;
 import feign.RequestLine;
-import org.dreamscale.springboot.crud.Widget;
+import org.dreamscale.springboot.rest.Widget;
 
 @Headers({
         "Content-Type: application/json",
