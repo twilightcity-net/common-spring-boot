@@ -1,6 +1,5 @@
 package org.dreamscale;
 
-import groovyx.net.http.RESTClient;
 import org.dreamscale.feign.DefaultFeignConfig;
 import org.dreamscale.feign.JacksonFeignBuilder;
 import org.dreamscale.springboot.config.CommonSpringBootConfig;
@@ -10,8 +9,8 @@ import org.dreamscale.springboot.exception.ExceptionClient;
 import org.dreamscale.springboot.exception.ExceptionResource;
 import org.dreamscale.springboot.exception.ExceptionThrowingFilter;
 import org.dreamscale.springboot.swagger.SwaggerClient;
+import org.dreamscale.test.BaseTestConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,8 +21,6 @@ import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import java.net.URISyntaxException;
 
 
 @Import({
@@ -39,17 +36,10 @@ import java.net.URISyntaxException;
         SecurityAutoConfiguration.class,
         ManagementWebSecurityAutoConfiguration.class
 })
-class ComponentTestConfig {
+class ComponentTestConfig extends BaseTestConfig {
 
-    @Value("http://localhost:${server.port}/")
-    String baseUrl;
     @Autowired
     JacksonFeignBuilder feignBuilder;
-
-    @Bean
-    RESTClient restClient() throws URISyntaxException {
-        return new RESTClient(baseUrl);
-    }
 
     @Bean
     CrudClient crudClient() {
