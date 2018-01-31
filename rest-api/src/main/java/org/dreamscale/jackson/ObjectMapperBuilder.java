@@ -33,10 +33,6 @@ public class ObjectMapperBuilder {
         return mapper.copy();
     }
 
-    public ObjectMapperBuilder disableFailOnUnknownProperties() {
-        return disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-    }
-
     public ObjectMapperBuilder jsr310TimeModule() {
         ObjectMapper copy = copy()
                 .registerModule(new JavaTimeModule())

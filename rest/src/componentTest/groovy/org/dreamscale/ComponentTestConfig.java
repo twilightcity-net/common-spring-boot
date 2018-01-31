@@ -9,6 +9,7 @@ import org.dreamscale.springboot.crud.CrudResource;
 import org.dreamscale.springboot.exception.ExceptionClient;
 import org.dreamscale.springboot.exception.ExceptionResource;
 import org.dreamscale.springboot.exception.ExceptionThrowingFilter;
+import org.dreamscale.springboot.swagger.SwaggerClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration;
@@ -73,6 +74,11 @@ class ComponentTestConfig {
     @Bean
     ExceptionThrowingFilter exceptionThrowingFilter() {
         return new ExceptionThrowingFilter();
+    }
+
+    @Bean
+    SwaggerClient swaggerClient() {
+        return feignBuilder.target(SwaggerClient.class, baseUrl);
     }
 
 }

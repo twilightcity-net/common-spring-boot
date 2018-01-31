@@ -3,6 +3,7 @@ package org.dreamscale.springboot.config;
 import org.dreamscale.springboot.exception.ExceptionConfig;
 import org.dreamscale.springboot.http.RequestContextFilter;
 import org.dreamscale.springboot.logging.LoggingConfig;
+import org.dreamscale.springboot.swagger.SwaggerConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Import;
 @Import({
         LoggingConfig.class,
         ExceptionConfig.class,
+        SwaggerConfig.class,
         CommonSpringBootAutoConfig.class
 })
 @Configuration
