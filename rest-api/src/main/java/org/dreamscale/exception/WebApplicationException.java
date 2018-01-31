@@ -2,10 +2,16 @@ package org.dreamscale.exception;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.dreamscale.http.HttpStatus;
 
 @Getter
 @ToString
 public class WebApplicationException extends RuntimeException implements ErrorEntityException {
+
+    public static int getStatusCode(Exception ex) {
+        return (ex instanceof WebApplicationException) ? ((WebApplicationException) ex).getStatusCode() : HttpStatus.SC_INTERNAL_SERVER_ERROR;
+    }
+
 
     private ErrorEntity errorEntity;
     private int statusCode;

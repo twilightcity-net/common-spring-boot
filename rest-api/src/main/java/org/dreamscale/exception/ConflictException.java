@@ -18,7 +18,7 @@ public class ConflictException extends WebApplicationException {
     }
 
     public ConflictException(Throwable cause, LoggingLevel logLevel, ErrorCodes errorCode, String messageTemplate, Object... args) {
-        super(HttpStatus.SC_BAD_REQUEST, ErrorEntity.create(logLevel, errorCode, messageTemplate, args), cause);
+        super(HttpStatus.SC_CONFLICT, ErrorEntity.create(logLevel, errorCode, messageTemplate, args), cause);
     }
 
     public ConflictException(ErrorEntity errorEntity) {

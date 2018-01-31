@@ -88,7 +88,7 @@ public class LoggingFilter extends OncePerRequestFilter implements ResponseBodyA
     }
 
     private String getResponseInfo(HttpServletRequest request, Exception ex) {
-        int statusCode = (ex instanceof WebApplicationException) ? ((WebApplicationException) ex).getStatusCode() : HttpStatus.SC_INTERNAL_SERVER_ERROR;
+        int statusCode = WebApplicationException.getStatusCode(ex);
         return "Server response: [" + request.getMethod() + " " + request.getRequestURI() + " < " + statusCode + "]";
     }
 

@@ -80,7 +80,10 @@ public class ResponseLogger {
 
     private LoggingLevel getLogLevelFromErrorEntity(Object responseBody) {
         if (responseBody instanceof ErrorEntity) {
-            return ((ErrorEntity) responseBody).getLogLevel();
+            LoggingLevel level = ((ErrorEntity) responseBody).getLogLevel();
+            if (level != null) {
+                return level;
+            }
         }
         return LoggingLevel.NONE;
     }

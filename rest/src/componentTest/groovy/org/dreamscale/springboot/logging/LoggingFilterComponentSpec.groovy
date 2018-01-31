@@ -2,8 +2,8 @@ package org.dreamscale.springboot.logging
 
 import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.Logger
-import ch.qos.logback.classic.spi.ILoggingEvent
 import org.dreamscale.ComponentTest
+import org.dreamscale.exception.NotFoundException
 import org.dreamscale.logging.LogbackCaptureAppender
 import org.dreamscale.springboot.crud.CrudClient
 import org.dreamscale.springboot.crud.CrudResource
@@ -62,6 +62,17 @@ class LoggingFilterComponentSpec extends Specification {
         then:
         logbackCaptureAppender.assertEventWithContent('Server Request: [POST /widgets], Payload: [{"id":5}]')
         logbackCaptureAppender.assertEventWithContent( 'Server Response: [POST /widgets < 201], Payload: [{"id":5}]')
+    }
+
+    def "should log ErrorEntity when exception is thrown"() {
+        when:
+        crudClient.find(1)
+        
+        then:
+        thrown(NotFoundException)
+
+        and:
+        logbackCaptureAppender.assertEventWithContent('Server Response: [GET /widgets/1 < 404], Payload: [{"errorCode":null,"violations":null,"message":"No widget with id=1","args":[1]}]')
     }
 
 }

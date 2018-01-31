@@ -21,7 +21,11 @@ public class ErrorEntity {
     @JsonIgnore
     private LoggingLevel logLevel;
 
-    static ErrorEntity create(LoggingLevel logLevel, ErrorCodes errorCode, String messageTemplate, Object[] args) {
+    public static ErrorEntity create(ErrorCodes errorCode, String messageTemplate, Object[] args) {
+        return create(LoggingLevel.ERROR, errorCode, messageTemplate, args);
+    }
+
+    public static ErrorEntity create(LoggingLevel logLevel, ErrorCodes errorCode, String messageTemplate, Object[] args) {
         return ErrorEntity.builder()
                 .errorCode(errorCode != null ? errorCode.makeErrorCode() : null)
                 .message(String.format(messageTemplate, args))
