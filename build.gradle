@@ -1,9 +1,3 @@
-buildscript {
-    dependencies {
-        classpath "org.dreamscale:gradle-core:1.3.2"
-    }
-}
-
 allprojects {
     apply plugin: "org.dreamscale.core"
 
