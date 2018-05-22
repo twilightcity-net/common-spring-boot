@@ -1,0 +1,15 @@
+ext {
+    artifactId = "${artifactId}-persistence"
+}
+
+dependencies {
+    compile rootProject
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+
+    sharedTestCompile "org.springframework:spring-test:4.1.6.RELEASE"
+    sharedTestCompile ("org.spockframework:spock-spring:${spockVersion}") {
+        exclude group: "org.codehaus.groovy"
+    }
+
+    componentTestCompile "com.h2database:h2:1.4.195"
+}
