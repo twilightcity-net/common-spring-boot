@@ -1,3 +1,4 @@
 include 'rest'
 include 'rest-api'
 include 'rest-feign'
+include 'persistence'
