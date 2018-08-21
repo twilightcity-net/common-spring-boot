@@ -213,12 +213,14 @@ public class JacksonFeignBuilder {
 
     private void setLogger(Feign.Builder builder, Class apiType) {
         Logger logger = this.logger;
-        if (logger == null) {
+        if (logger == null && requestResponseLoggerFactory != null) {
             logger = new FeignLogger(requestResponseLoggerFactory, apiType);
         }
-        builder.logger(logger);
-        if (logLevel != null) {
-            builder.logLevel(logLevel);
+        if (logger != null) {
+            builder.logger(logger);
+            if (logLevel != null) {
+                builder.logLevel(logLevel);
+            }
         }
     }
 
