@@ -16,9 +16,14 @@ public class ResponseLogger {
     private String id;
 
     public void logResponse() {
+        logResponse(null);
+    }
+
+    public void logResponse(Long requestStartTimeMs) {
         if (log.isInfoEnabled()) {
             StringBuilder logResponseBuilder = new StringBuilder();
             appendResponseInfo(logResponseBuilder);
+            appendElapsedTime(logResponseBuilder, requestStartTimeMs);
             appendResponsePayload(logResponseBuilder);
 
             if (logResponseBuilder.length() > 0) {
@@ -33,6 +38,13 @@ public class ResponseLogger {
                 .append(response.getRequestURI())
                 .append(" < ").append(response.getStatusCode())
                 .append("]");
+    }
+
+    private void appendElapsedTime(StringBuilder logResponseBuilder, Long requestStartTimeMs) {
+        if (requestStartTimeMs != null) {
+            long elapsedTime = System.currentTimeMillis() - requestStartTimeMs;
+            logResponseBuilder.append(", ElapsedTime: ").append(elapsedTime).append("ms");
+        }
     }
 
     private void appendResponsePayload(StringBuilder builder) {

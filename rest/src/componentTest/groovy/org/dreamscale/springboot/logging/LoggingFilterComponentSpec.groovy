@@ -44,7 +44,7 @@ class LoggingFilterComponentSpec extends Specification {
 
         then:
         logbackCaptureAppender.assertEventWithContent('Server Request: [GET /widgets/5], Headers:')
-        logbackCaptureAppender.assertEventWithRegex('Server Response: \\[GET /widgets/5 < 200\\]$')
+        logbackCaptureAppender.assertEventWithRegex('Server Response: \\[GET /widgets/5 < 200\\], ElapsedTime: \\d+ms$')
 
         when:
         logger.setLevel(Level.TRACE)
@@ -52,7 +52,7 @@ class LoggingFilterComponentSpec extends Specification {
 
         then:
         logbackCaptureAppender.assertEventWithContent('Server Request: [GET /widgets/5], Headers:')
-        logbackCaptureAppender.assertEventWithContent('Server Response: [GET /widgets/5 < 200], Payload: [{"id":5}]')
+        logbackCaptureAppender.assertEventWithRegex(/Server Response: \[GET \/widgets\/5 < 200\], ElapsedTime: \d+ms, Payload: \[\{"id":5\}\]/)
     }
 
     def "should log POST payload"() {
@@ -61,7 +61,7 @@ class LoggingFilterComponentSpec extends Specification {
 
         then:
         logbackCaptureAppender.assertEventWithContent('Server Request: [POST /widgets], Payload: [{"id":5}]')
-        logbackCaptureAppender.assertEventWithContent('Server Response: [POST /widgets < 201], Payload: [{"id":5}]')
+        logbackCaptureAppender.assertEventWithRegex(/Server Response: \[POST \/widgets < 201\], ElapsedTime: \d+ms, Payload: \[\{"id":5\}\]/)
     }
 
     def "should log ErrorEntity when exception is thrown"() {
@@ -72,7 +72,7 @@ class LoggingFilterComponentSpec extends Specification {
         thrown(NotFoundException)
 
         and:
-        logbackCaptureAppender.assertEventWithContent('Server Response: [GET /widgets/1 < 404], Payload: [{"message":"No widget with id=1","args":[1]}]')
+        logbackCaptureAppender.assertEventWithRegex(/Server Response: \[GET \/widgets\/1 < 404\], ElapsedTime: \d+ms, Payload: \[\{"message":"No widget with id=1","args":\[1\]\}\]/)
     }
 
 }

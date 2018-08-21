@@ -66,6 +66,7 @@ public class LoggingFilter extends OncePerRequestFilter implements ResponseBodyA
         ServletRequestAdapter servletRequestAdapter = new ServletRequestAdapter(request);
         Logger logger = getLogger(servletRequestAdapter);
 
+        long startTime = System.currentTimeMillis();
         try {
             requestResponseLoggerFactory.createRequestLogger(servletRequestAdapter, logger).logRequest();
             try {
@@ -77,7 +78,7 @@ public class LoggingFilter extends OncePerRequestFilter implements ResponseBodyA
             Object responseBody = RESPONSE_BODY.get();
 
             ServletResponseAdapter responseAdapter = new ServletResponseAdapter(request, response, objectMapper, responseBody);
-            requestResponseLoggerFactory.createResponseLogger(responseAdapter, logger).logResponse();
+            requestResponseLoggerFactory.createResponseLogger(responseAdapter, logger).logResponse(startTime);
         } finally {
             RESPONSE_BODY.remove();
         }
