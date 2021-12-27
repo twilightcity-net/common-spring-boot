@@ -14,6 +14,7 @@ buildscript {
 }
 
 allprojects {
+    apply plugin: "java-library"
     apply plugin: "net.twilightcity.core"
 
     version = "${springBootVersion}-${version}"
@@ -31,10 +32,10 @@ allprojects {
     }
 
     dependencies {
-        compile "com.google.guava:guava:23.6-jre"
-        compile "com.fasterxml.jackson.core:jackson-databind:2.9.4"
-        compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-        compile("net.sf.dozer:dozer:5.5.1") {
+        api 'com.google.guava:guava:31.0.1-jre'
+        api "com.fasterxml.jackson.core:jackson-databind:2.13.1"
+        api "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+        api("com.github.dozermapper:dozer-core:6.5.2") {
             exclude group: "org.slf4j"
         }
 

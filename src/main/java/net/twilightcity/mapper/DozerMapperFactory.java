@@ -1,6 +1,7 @@
 package net.twilightcity.mapper;
 
-import org.dozer.DozerBeanMapper;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,9 @@ public class DozerMapperFactory {
     }
 
     public DozerMapper createDozerMapper() {
-        DozerBeanMapper mapper = new DozerBeanMapper();
-        mapper.setMappingFiles(mappingConfigFileList);
+        Mapper mapper = DozerBeanMapperBuilder.create()
+                .withMappingFiles(mappingConfigFileList)
+                .build();
         return new DozerMapper(mapper);
     }
 

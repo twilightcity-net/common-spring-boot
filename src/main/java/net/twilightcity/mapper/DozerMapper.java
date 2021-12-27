@@ -1,6 +1,6 @@
 package net.twilightcity.mapper;
 
-import org.dozer.Mapper;
+import com.github.dozermapper.core.Mapper;
 
 import java.util.List;
 import java.util.function.Function;

@@ -93,7 +93,7 @@ class ClientExceptionTranslationSpec extends Specification {
         then:
         WebApplicationException ex = thrown()
         assert ex.statusCode == HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE
-        assert ex.message == null
+        assert ex.message == "Content type 'application/json' not supported"
     }
 
 }
