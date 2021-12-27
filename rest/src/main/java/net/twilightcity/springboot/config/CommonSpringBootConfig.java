@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Primary;
 public class CommonSpringBootConfig {
 
     @Bean
-    public RequestContextFilter requestContextFilter() {
+    public RequestContextFilter commonRequestContextFilter() {
         return new RequestContextFilter();
     }
 

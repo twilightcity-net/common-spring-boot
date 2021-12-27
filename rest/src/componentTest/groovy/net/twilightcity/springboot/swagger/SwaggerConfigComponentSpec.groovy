@@ -3,8 +3,10 @@ package net.twilightcity.springboot.swagger
 import net.twilightcity.ComponentTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import spock.lang.Ignore
 import spock.lang.Specification
 
+@Ignore
 @ComponentTest
 class SwaggerConfigComponentSpec extends Specification {
 

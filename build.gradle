@@ -15,6 +15,7 @@ buildscript {
 
 allprojects {
     apply plugin: "java-library"
+    apply plugin: "maven-publish"
     apply plugin: "net.twilightcity.core"
 
     version = "${springBootVersion}-${version}"
@@ -33,7 +34,7 @@ allprojects {
 
     dependencies {
         api 'com.google.guava:guava:31.0.1-jre'
-        api "com.fasterxml.jackson.core:jackson-databind:2.13.1"
+        api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
         api "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
         api("com.github.dozermapper:dozer-core:6.5.2") {
             exclude group: "org.slf4j"
@@ -50,6 +51,17 @@ allprojects {
         }
         sharedTestApi ("org.spockframework:spock-spring:${spockVersion}") {
             exclude group: "org.codehaus.groovy"
+        }
+    }
+
+    project.afterEvaluate {
+        publishing {
+            publications {
+                maven(MavenPublication) {
+                    artifactId = project.ext.artifactId
+                    from components.java
+                }
+            }
         }
     }
 }

@@ -104,7 +104,7 @@ class RestResponseEntityExceptionHandlerSpec extends Specification {
         assertResponse(ex, ValidationErrorCodes.ERROR_ENTITY_VALIDATION, HttpStatus.SC_BAD_REQUEST, "One or more validation errors occurred")
 
         String errorResponseData = ex.getResponse().getData()
-        assert errorResponseData.contains(/violations={value=may not be null}/)
+        assert errorResponseData.contains(/violations={value=must not be null}/)
     }
 
     def "should respond with custom error code when an exception is thrown with embedded ErrorEntity"() {
@@ -142,7 +142,9 @@ class RestResponseEntityExceptionHandlerSpec extends Specification {
                                          int statusCode, String message) {
         String errorResponseData = e.getResponse().getData()
         assert e.statusCode == statusCode
-        assert errorResponseData.contains(/errorCode=${errorCode?.makeErrorCode()}/)
+        if (errorCode != null) {
+            assert errorResponseData.contains(/errorCode=${errorCode?.makeErrorCode()}/)
+        }
         assert errorResponseData.contains(/message=${message}/)
         errorResponseData
     }

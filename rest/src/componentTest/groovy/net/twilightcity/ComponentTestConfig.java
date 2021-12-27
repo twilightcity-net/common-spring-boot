@@ -11,13 +11,13 @@ import net.twilightcity.springboot.exception.ExceptionResource;
 import net.twilightcity.springboot.exception.ExceptionThrowingFilter;
 import net.twilightcity.springboot.swagger.SwaggerClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.ManagementWebSecurityAutoConfiguration;
-import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Import;
         DataSourceAutoConfiguration.class,
         LiquibaseAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class,
-        MetricRepositoryAutoConfiguration.class,
+        MetricsAutoConfiguration.class,
         SecurityAutoConfiguration.class,
         ManagementWebSecurityAutoConfiguration.class
 })
