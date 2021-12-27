@@ -2,13 +2,12 @@ package net.twilightcity.converters
 
 import spock.lang.Specification
 
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime;
 import java.sql.Timestamp
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-import static ARandom.aRandom;
-
+import static ARandom.aRandom
 
 class LocalDateTimePersistenceConverterSpec extends Specification {
 
@@ -20,20 +19,16 @@ class LocalDateTimePersistenceConverterSpec extends Specification {
         LocalDateTime localDateTime = aRandom.localDateTime()
 
         when:
-        def sqlTimeStamp = localDateTimePersistenceConverter.convertToDatabaseColumn(localDateTime)
+        Timestamp sqlTimeStamp = localDateTimePersistenceConverter.convertToDatabaseColumn(localDateTime)
 
         then:
         def formattedLocalDateTime = localDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT))
         assert(timeStampString(sqlTimeStamp) == formattedLocalDateTime)
-        assert (sqlTimeStamp instanceof Timestamp)
     }
 
     def "should return null if LocalDateTime is null"(){
-        when:
-        def sqlTimeStamp = localDateTimePersistenceConverter.convertToDatabaseColumn(null)
-
-        then:
-        assert sqlTimeStamp == null
+        expect:
+        assert localDateTimePersistenceConverter.convertToDatabaseColumn(null) == null
     }
 
     def "should convert to TimeStamp to LocalDateTime"(){
@@ -41,22 +36,15 @@ class LocalDateTimePersistenceConverterSpec extends Specification {
         Timestamp timestamp = aRandom.timeStamp()
 
         when:
-        def localDateTime = localDateTimePersistenceConverter.convertToEntityAttribute(timestamp)
+        LocalDateTime localDateTime = localDateTimePersistenceConverter.convertToEntityAttribute(timestamp)
 
         then:
-        def formattedTimeStampDate = timestamp.format("yyyy-MM-dd")
-        def formattedTimeStampTime = timestamp.format("HH:mm:ss.SSS")
-        assert (localDateTime.date.toString() == formattedTimeStampDate)
-        assert (localDateTime.time.toString() == formattedTimeStampTime)
-        assert (localDateTime instanceof LocalDateTime)
+        assert localDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)) == timestamp.format(DATE_TIME_FORMAT)
     }
 
     def "should return null if TimeStamp is null"(){
-        when:
-        def localDateTime = localDateTimePersistenceConverter.convertToEntityAttribute(null)
-
-        then:
-        assert localDateTime == null
+        expect:
+        assert localDateTimePersistenceConverter.convertToEntityAttribute(null) == null
     }
 
     private String timeStampString(def timeStamp){

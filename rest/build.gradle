@@ -13,15 +13,16 @@ dependencies {
         exclude group: "org.slf4j"
     }
 
-    mainTestCompile "org.dreamscale:common-test:1.+"
-    mainTestCompile "org.springframework:spring-test:4.3.14.RELEASE"
-    mainTestCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-    mainTestCompile "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
-    mainTestCompile "org.apache.httpcomponents:httpclient:4.5.5"
+    mainTestApi "org.dreamscale:common-test:1.+"
+    mainTestApi "org.springframework:spring-test:4.3.14.RELEASE"
+    mainTestApi "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    mainTestApi "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1"
+    mainTestApi "org.apache.httpcomponents:httpclient:4.5.5"
+    mainTestImplementation "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
-    sharedTestCompile project(":rest-feign")
+    sharedTestApi project(":rest-feign")
 }
-
+/*
 publishing_ext {
     publishJavadoc true
     publication('mainTest')
@@ -33,3 +34,4 @@ bintray {
         licenses = ['Apache-2.0']
     }
 }
+*/

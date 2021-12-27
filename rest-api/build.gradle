@@ -11,10 +11,11 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.4"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4"
 }
-
+/*
 bintray {
     publications = ['commonSpringBootRestApi']
     pkg {
         licenses = ['Apache-2.0']
     }
 }
+*/
