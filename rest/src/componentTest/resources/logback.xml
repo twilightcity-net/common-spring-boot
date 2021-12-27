@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/dreamscale/logback/common.xml"/>
+    <include resource="net/twilightcity/logback/common.xml"/>
 
-    <logger name="org.dreamscale" level="DEBUG"/>
+    <logger name="net.twilightcity" level="DEBUG"/>
 
-    <appender name="CAPTURE" class="org.dreamscale.logging.LogbackCaptureAppender"/>
+    <appender name="CAPTURE" class="net.twilightcity.logging.LogbackCaptureAppender"/>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
