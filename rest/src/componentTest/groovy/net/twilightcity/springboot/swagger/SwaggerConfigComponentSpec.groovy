@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value
 import spock.lang.Ignore
 import spock.lang.Specification
 
-@Ignore
 @ComponentTest
 class SwaggerConfigComponentSpec extends Specification {
 

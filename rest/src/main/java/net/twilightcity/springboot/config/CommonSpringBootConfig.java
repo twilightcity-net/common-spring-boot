@@ -7,7 +7,6 @@ import net.twilightcity.jackson.ObjectMapperBuilder;
 import net.twilightcity.springboot.exception.ExceptionConfig;
 import net.twilightcity.springboot.http.RequestContextFilter;
 import net.twilightcity.springboot.logging.LoggingConfig;
-import net.twilightcity.springboot.swagger.SwaggerConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Primary;
 @Import({
         LoggingConfig.class,
         ExceptionConfig.class,
-        SwaggerConfig.class,
         CommonSpringBootAutoConfig.class
 })
 @Configuration

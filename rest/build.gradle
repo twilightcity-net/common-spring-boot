@@ -6,9 +6,7 @@ dependencies {
     api rootProject
     api project(":rest-api")
     api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-//    api 'org.springframework.hateoas:spring-hateoas:0.24.0.RELEASE'
-//    api "io.springfox:springfox-swagger2:2.7.0"
-//    api "io.springfox:springfox-swagger-ui:2.7.0"
+    api "org.springdoc:springdoc-openapi-ui:1.6.4"
     api("com.github.dozermapper:dozer-core:6.5.2") {
         exclude group: "org.slf4j"
     }
