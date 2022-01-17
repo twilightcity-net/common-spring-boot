@@ -11,7 +11,7 @@ import java.util.Map;
 })
 public interface SwaggerClient {
 
-    @RequestLine("GET /v2/api-docs")
+    @RequestLine("GET /v3/api-docs")
     Map getSwaggerJson();
 
 }

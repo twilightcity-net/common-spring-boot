@@ -8,8 +8,8 @@ dependencies {
     api "javax.annotation:javax.annotation-api:1.3.2"
     api "javax.validation:validation-api:2.0.1.Final"
     api "org.hibernate.validator:hibernate-validator:6.2.0.Final"
-    api "com.fasterxml.jackson.core:jackson-databind:2.13.1"
-    api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1"
+    api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
 }
 /*
 bintray {

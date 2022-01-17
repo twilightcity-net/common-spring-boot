@@ -6,7 +6,7 @@ dependencies {
     api rootProject
     api "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 
-    sharedTestApi "org.springframework:spring-test:4.1.6.RELEASE"
+    sharedTestApi "org.springframework:spring-test:${springVersion}"
     sharedTestApi ("org.spockframework:spock-spring:${spockVersion}") {
         exclude group: "org.codehaus.groovy"
     }
