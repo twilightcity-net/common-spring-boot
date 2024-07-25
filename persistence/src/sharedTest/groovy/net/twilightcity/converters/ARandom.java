@@ -1,7 +1,7 @@
 package net.twilightcity.converters;
 
 import lombok.experimental.Delegate;
-import org.dreamscale.testsupport.RandomGenerator;
+import net.twilightcity.testsupport.RandomGenerator;
 
 class ARandom {
 

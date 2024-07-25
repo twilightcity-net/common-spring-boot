@@ -40,7 +40,7 @@ allprojects {
             exclude group: "org.slf4j"
         }
 
-        sharedTestApi "org.dreamscale:common-test:1.+"
+        sharedTestApi "net.twilightcity:common-test:1.+"
         sharedTestApi "org.codehaus.groovy:groovy-all:${groovyVersion}"
         sharedTestApi 'cglib:cglib-nodep:2.2.2'
         sharedTestApi 'org.objenesis:objenesis:1.3'
@@ -56,6 +56,16 @@ allprojects {
 
     project.afterEvaluate {
         publishing {
+            repositories {
+                maven {
+                    url "http://nexus.twilightcity.net:8081/repository/public"
+                    credentials {
+                        username "ci"
+                        password findProperty('nexus.password')
+                    }
+                }
+            }
+
             publications {
                 maven(MavenPublication) {
                     artifactId = project.ext.artifactId
@@ -65,15 +75,3 @@ allprojects {
         }
     }
 }
-/*
-publishing_ext {
-    publishJavadoc true
-}
-
-bintray {
-    publications = ['commonSpringBoot']
-    pkg {
-        licenses = ['Apache-2.0']
-    }
-}
-*/
