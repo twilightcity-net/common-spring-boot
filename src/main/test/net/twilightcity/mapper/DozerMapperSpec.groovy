@@ -1,6 +1,6 @@
 package net.twilightcity.mapper
 
-import org.dreamscale.testsupport.BeanCompare
+import net.twilightcity.testsupport.BeanCompare
 import net.twilightcity.mapper.DozerMapper
 import net.twilightcity.mapper.DozerMapperFactory
 import spock.lang.Specification

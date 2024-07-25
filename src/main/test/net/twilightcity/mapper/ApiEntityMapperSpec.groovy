@@ -1,6 +1,6 @@
 package net.twilightcity.mapper
 
-import org.dreamscale.testsupport.BeanCompare
+import net.twilightcity.testsupport.BeanCompare
 import spock.lang.Specification
 
 class ApiEntityMapperSpec extends Specification {
