@@ -11,5 +11,5 @@ dependencies {
         exclude group: "org.codehaus.groovy"
     }
 
-    componentTestCompile "com.h2database:h2:1.4.195"
+    componentTestImplementation "com.h2database:h2:1.4.195"
 }

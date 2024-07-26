@@ -4,16 +4,9 @@ ext {
 }
 
 dependencies {
-    compile project(":rest-api")
-    compile "io.github.openfeign:feign-core:${feignVersion}"
-    compile "io.github.openfeign:feign-jackson:${feignVersion}"
-    compile "io.github.openfeign.form:feign-form:3.8.0"
+    implementation project(":rest-api")
+    implementation "io.github.openfeign:feign-core:${feignVersion}"
+    implementation "io.github.openfeign:feign-jackson:${feignVersion}"
+    implementation "io.github.openfeign.form:feign-form:3.8.0"
 }
-/*
-bintray {
-    publications = ['commonSpringBootRestFeign']
-    pkg {
-        licenses = ['Apache-2.0']
-    }
-}
-*/
+

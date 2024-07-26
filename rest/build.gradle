@@ -14,16 +14,3 @@ dependencies {
     sharedTestApi project(":rest-feign")
     sharedTestApi project(":rest-test")
 }
-/*
-publishing_ext {
-    publishJavadoc true
-    publication('mainTest')
-}
-
-bintray {
-    publications = ['commonSpringBootRest', 'commonSpringBootRestTest']
-    pkg {
-        licenses = ['Apache-2.0']
-    }
-}
-*/
