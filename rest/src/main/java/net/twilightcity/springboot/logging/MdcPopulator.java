@@ -2,7 +2,7 @@ package net.twilightcity.springboot.logging;
 
 import net.twilightcity.logging.LoggingContext;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface MdcPopulator {
 

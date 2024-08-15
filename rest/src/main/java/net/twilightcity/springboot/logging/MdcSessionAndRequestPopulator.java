@@ -4,7 +4,7 @@ import net.twilightcity.logging.LoggingContext;
 import net.twilightcity.logging.RequestId;
 import net.twilightcity.logging.SessionId;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class MdcSessionAndRequestPopulator implements MdcPopulator {
 

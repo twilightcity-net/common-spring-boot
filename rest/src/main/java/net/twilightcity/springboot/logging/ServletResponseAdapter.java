@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import net.twilightcity.logging.LoggerSupport;
 import net.twilightcity.logging.ResponseAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
