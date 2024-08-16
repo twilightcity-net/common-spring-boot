@@ -9,12 +9,9 @@ import net.twilightcity.exception.ForbiddenException;
 import net.twilightcity.exception.WebApplicationException;
 import net.twilightcity.springboot.validation.ValidationErrorCodes;
 import net.twilightcity.springboot.security.SecurityErrorCodes;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -78,9 +75,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     // this ensures all exceptions handled by the superclass will have an ErrorEntity body
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(
+            Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request
+    ) {
         ErrorEntity errorEntity = ErrorEntity.getOrCreate(ex);
-        return createResponseEntity(errorEntity, status, request);
+        return createResponseEntity(errorEntity, statusCode.value(), request);
     }
 
     @ExceptionHandler(value = Throwable.class)
@@ -115,7 +114,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request
+    ) {
         Throwable cause = ex.getCause();
         if (cause instanceof InvalidFormatException) {
             return handleInvalidFormatException((InvalidFormatException) ex.getCause(), request);
@@ -136,12 +137,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request
+    ) {
         Map<String, String> violationsMap = new HashMap<>();
-        if (ex.getBindingResult() != null) {
-            for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-                violationsMap.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+            violationsMap.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
         // the default message of MethodArgumentNotValidException contains data we don't want to expose (like class names)
         // but it may be useful for debugging, so log it
@@ -151,7 +152,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .violations(violationsMap)
                 .errorCode(ValidationErrorCodes.ERROR_ENTITY_VALIDATION.makeErrorCode())
                 .build();
-        return createResponseEntity(errorEntity, status, request);
+        return createResponseEntity(errorEntity, status.value(), request);
     }
 
     @ExceptionHandler(value = {ValidationException.class})

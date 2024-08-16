@@ -39,7 +39,7 @@ class LocalDateTimePersistenceConverterSpec extends Specification {
         LocalDateTime localDateTime = localDateTimePersistenceConverter.convertToEntityAttribute(timestamp)
 
         then:
-        assert localDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)) == timestamp.format(DATE_TIME_FORMAT)
+        assert localDateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)) == timeStampString(timestamp)
     }
 
     def "should return null if TimeStamp is null"(){
@@ -48,6 +48,7 @@ class LocalDateTimePersistenceConverterSpec extends Specification {
     }
 
     private String timeStampString(def timeStamp){
-        return new SimpleDateFormat(DATE_TIME_FORMAT).format(timeStamp);
+        return new SimpleDateFormat(DATE_TIME_FORMAT).format(timeStamp)
     }
+
 }

@@ -33,7 +33,7 @@ public class CrudResource {
     }
 
     @GetMapping("/{id}")
-    public Widget find(@PathVariable Long id) {
+    public Widget find(@PathVariable("id") Long id) {
         Widget widget = widgetMap.get(id);
         if (DefaultGroovyMethods.asBoolean(widget)) {
             return widget;
@@ -50,13 +50,13 @@ public class CrudResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id, @RequestBody Widget widget) {
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Widget widget) {
         widgetMap.put(id, widget);
         return ResponseEntity.ok().body(widget);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         widgetMap.remove(id);
         return ResponseEntity.ok().build();
     }
