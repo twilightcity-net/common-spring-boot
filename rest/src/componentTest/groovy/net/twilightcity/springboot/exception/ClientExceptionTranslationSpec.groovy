@@ -63,7 +63,7 @@ class ClientExceptionTranslationSpec extends Specification {
         then:
         WebApplicationException ex = thrown()
         assert ex.statusCode == HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE
-        assert ex.errorEntity.message == "Content type 'application/json' not supported"
+        assert ex.errorEntity.message == "Content-Type 'application/json' is not supported"
     }
 
     def "should translate NOT_ACCEPTABLE to WebApplicationException"() {
@@ -73,7 +73,7 @@ class ClientExceptionTranslationSpec extends Specification {
         then:
         WebApplicationException ex = thrown()
         assert ex.statusCode == HttpStatus.SC_NOT_ACCEPTABLE
-        assert ex.errorEntity.message == "Could not find acceptable representation"
+        assert ex.errorEntity.message == "No acceptable representation"
     }
 
     def "should return ErrorEntity with message and status if caller accepts text/plain but not application/json"() {
@@ -83,7 +83,7 @@ class ClientExceptionTranslationSpec extends Specification {
         then:
         WebApplicationException ex = thrown()
         assert ex.statusCode == HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE
-        assert ex.message == "Content type 'application/json' not supported"
+        assert ex.message == "Content-Type 'application/json' is not supported"
     }
 
     def "should return ErrorEntity with status caller does not accept text/plain or application/json"() {
@@ -93,7 +93,7 @@ class ClientExceptionTranslationSpec extends Specification {
         then:
         WebApplicationException ex = thrown()
         assert ex.statusCode == HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE
-        assert ex.message == "Content type 'application/json' not supported"
+        assert ex.message == "Content-Type 'application/json' is not supported"
     }
 
 }

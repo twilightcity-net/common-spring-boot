@@ -2,6 +2,7 @@ package net.twilightcity.converters
 
 import spock.lang.Specification
 import java.sql.Timestamp
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
@@ -43,10 +44,7 @@ class ZoneDateTimePersistenceConverterSpec extends Specification {
         def zonedDateTime = zonedDateTimePersistenceConverter.convertToEntityAttribute(timestamp)
 
         then:
-        def formattedTimeStampDate = timestamp.format("yyyy-MM-dd")
-        def formatedTimeStampTime = timestamp.format("HH:mm:ss", TimeZone.getTimeZone(ZoneOffset.UTC))
-        assert (zonedDateTime.dateTime.date.toString() == formattedTimeStampDate)
-        assert (zonedDateTime.dateTime.time.toString() == formatedTimeStampTime)
+        assert timestamp.toInstant() == zonedDateTime.toInstant()
         assert (zonedDateTime instanceof ZonedDateTime)
     }
 
@@ -58,7 +56,11 @@ class ZoneDateTimePersistenceConverterSpec extends Specification {
         assert zonedDateTime == null
     }
 
-    private String timeStampString(def timeStamp){
-        return new SimpleDateFormat(DATE_TIME_FORMAT).format(timeStamp);
+    private String timeStampString(Timestamp timeStamp, String format = DATE_TIME_FORMAT, TimeZone timeZone = null){
+        def simpleDateFormat = new SimpleDateFormat(format)
+        if (timeZone != null) {
+            simpleDateFormat.setTimeZone(timeZone)
+        }
+        return simpleDateFormat.format(timeStamp);
     }
 }

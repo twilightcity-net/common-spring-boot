@@ -4,11 +4,11 @@ buildscript {
         mavenCentral()
         gradlePluginPortal()
         maven {
-            url "http://nexus.twilightcity.net:8081/repository/public"
+            url "http://nexus.twilightcity.net:8081/repository/public"; setAllowInsecureProtocol(true)
         }
     }
     dependencies {
-        classpath "net.twilightcity:gradle-core:2.+"
+        classpath "net.twilightcity:gradle-core:3.+"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
@@ -21,21 +21,25 @@ allprojects {
     version = "${springBootVersion}-${version}"
 
     ext {
-        groovyVersion = "2.4.20"
-        spockVersion = "1.3-groovy-2.4"
+        groovyVersion = "3.0.22"
+        spockVersion = "2.4-M4-groovy-3.0"
     }
 
     repositories {
         mavenCentral()
         maven {
-            url "http://nexus.twilightcity.net:8081/repository/public"
+            url "http://nexus.twilightcity.net:8081/repository/public"; setAllowInsecureProtocol(true)
         }
     }
 
     dependencies {
-        api 'com.google.guava:guava:31.0.1-jre'
+        api 'com.google.guava:guava:33.2.1-jre'
         api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+        api "javax.persistence:javax.persistence-api:2.2"
+        api "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
         api "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+        api "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+        api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
         api("com.github.dozermapper:dozer-core:6.5.2") {
             exclude group: "org.slf4j"
         }
@@ -52,6 +56,10 @@ allprojects {
         sharedTestApi ("org.spockframework:spock-spring:${spockVersion}") {
             exclude group: "org.codehaus.groovy"
         }
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
     }
 
     project.afterEvaluate {
