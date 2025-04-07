@@ -46,14 +46,13 @@ allprojects {
         sharedTestApi 'org.objenesis:objenesis:1.3'
         sharedTestApi "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
         sharedTestApi "org.codehaus.groovy:groovy-all:${groovyVersion}"
-        sharedTestApi ("org.spockframework:spock-core:${spockVersion}") {
+        sharedTestApi("org.spockframework:spock-core:${spockVersion}") {
             exclude group: "org.codehaus.groovy"
         }
-        sharedTestApi ("org.spockframework:spock-spring:${spockVersion}") {
+        sharedTestApi("org.spockframework:spock-spring:${spockVersion}") {
             exclude group: "org.codehaus.groovy"
         }
     }
-
 
 
     project.afterEvaluate {
@@ -75,35 +74,34 @@ allprojects {
                     artifact sourcesJar
                     artifact javadocJar
 
-                pom {
-                    name = 'Common SpringBoot'
-                    description = 'A shared library providing common functionality for building SpringBoot applications, with focus on persistence operations and REST service support.'
-                    url = 'https://github.com/twilightcity-net/common-spring-boot'
-
-                    licenses {
-                        license {
-                            name = 'Apache License, Version 2.0'
-                            url = 'https://www.apache.org/licenses/LICENSE-2.0'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id = 'twilightcity'
-                            name = 'Twilight City, Inc'
-                            email = 'admin@twilightcity.net'
-                        }
-                    }
-
-                    scm {
-                        connection = 'scm:git:git://github.com/twilightcity-net/common-spring-boot.git'
-                        developerConnection = 'scm:git:ssh://git@github.com:twilightcity-net/common-spring-boot.git'
+                    pom {
+                        name = 'Common SpringBoot'
+                        description = 'A shared library providing common functionality for building SpringBoot applications, with focus on persistence operations and REST service support.'
                         url = 'https://github.com/twilightcity-net/common-spring-boot'
+
+                        licenses {
+                            license {
+                                name = 'Apache License, Version 2.0'
+                                url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                            }
+                        }
+
+                        developers {
+                            developer {
+                                id = 'twilightcity'
+                                name = 'Twilight City, Inc'
+                                email = 'admin@twilightcity.net'
+                            }
+                        }
+
+                        scm {
+                            connection = 'scm:git:git://github.com/twilightcity-net/common-spring-boot.git'
+                            developerConnection = 'scm:git:ssh://git@github.com:twilightcity-net/common-spring-boot.git'
+                            url = 'https://github.com/twilightcity-net/common-spring-boot'
+                        }
                     }
                 }
             }
-
         }
-}
     }
 }
